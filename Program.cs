@@ -23,7 +23,7 @@ class Character
         Gold = 0;
     }
     
-    // 생성자 (초기값 설정)
+    // 생성자 (초깃값 설정)
     public Character(string name, string job)
     {
         Level = 1;
@@ -53,7 +53,7 @@ class Inventory
 
     public Inventory()
     {
-        Items = new List<Item>();  // 처음엔 비어 있음
+        Items = new List<Item>();
     }
 
     public void AddItem(Item item)
@@ -63,8 +63,8 @@ class Inventory
     
     public void ShowInventory()
     {
-        Console.WriteLine("\n인벤토리\n보유 중인 아이템을 관리할 수 있습니다.");
-        Console.WriteLine("\n[아이템 목록]");
+        Console.WriteLine("\n2. 인벤토리를 선택하셨습니다.");
+        Console.WriteLine("\n[아이템 목록]\n");
 
         if (Items.Count == 0)
         {
@@ -74,30 +74,11 @@ class Inventory
 
         foreach (Item item in Items)
         {
-            string equippedMarker;
-            if (item.IsEquipped)
-            {
-                equippedMarker = "[E]";
-            }
-            else
-            {
-                equippedMarker = " ";
-            }
+            string equippedMarker = item.IsEquipped ? "[E]" : " ";
+            string stats = item.Attack > 0 ? $"공격력 +{item.Attack}" : $"방어력 +{item.Defense}";
             
-            string stats;
-            if (item.Attack > 0)
-            {
-                stats = $"공격력 +{item.Attack}";
-            }
-            else
-            {
-                stats = $"방어력 +{item.Defense}";
-            }
-            
-            Console.WriteLine($"{equippedMarker} {item.Name} | {stats} | {item.Description}");
+            Console.WriteLine($"- {equippedMarker} {item.Name} | {stats} | {item.Description}");
         }
-        
-        Console.WriteLine("\n1. 장착 관리\n2. 나가기");
     }
     
     public void EquipItem()
@@ -107,22 +88,27 @@ class Inventory
         for (int i = 0; i < Items.Count; i++)
         {
             string equippedMarker = Items[i].IsEquipped ? "[E]" : " ";
-            Console.WriteLine($"{i + 1}. {equippedMarker} {Items[i].Name}");
+            string stats = Items[i].Attack > 0 ? $"공격력 +{Items[i].Attack}" : $"방어력 +{Items[i].Defense}";
+            Console.WriteLine($"{i + 1}. {equippedMarker} {Items[i].Name} | {stats} | {Items[i].Description}");
         }
 
-        Console.Write("\n장착하거나 해제할 아이템의 번호를 입력해 주세요. ");
-        string input = Console.ReadLine();
         int choice;
-
-        if (!int.TryParse(input, out choice) || choice < 0 || choice > Items.Count)
+        
+        while (true) // 입력이 올바를 때까지 반복
         {
-            Console.WriteLine("잘못된 입력입니다.");
-            return;
+            Console.Write("\n장착하거나 해제할 아이템의 번호를 입력해 주세요. ");
+            string input = Console.ReadLine();
+            
+            // 올바른 값 입력 시 break
+            if (int.TryParse(input, out choice) && choice >= 1 && choice <= Items.Count)
+            {
+                break; 
+            }
+
+            Console.WriteLine("\n잘못된 입력입니다. 다시 입력해 주세요.");
         }
 
-        if (choice == 0) return; // 취소
-
-        // 선택한 아이템 장착/해제
+        // 선택한 아이템 장착 또는 해제
         Item selectedItem = Items[choice - 1];
         selectedItem.IsEquipped = !selectedItem.IsEquipped;
 
@@ -136,16 +122,16 @@ class Item
     public string Name { get; set; }
     public int Attack { get; set; }
     public int Defense { get; set; }
-    public int Price { get; set; }
+    public int Gold { get; set; }
     public string Description { get; set; }
     public bool IsEquipped { get; set; }  // 장착 여부
 
-    public Item(string name, int attack, int defense, int price, string description)
+    public Item(string name, int attack, int defense, int gold, string description)
     {
         Name = name;
         Attack = attack;
         Defense = defense;
-        Price = price;
+        Gold = gold;
         Description = description;
         IsEquipped = false;  // 기본값: 장착 안 함
     }
@@ -160,7 +146,7 @@ class Program
         Character player = new Character("르탄", "전사"); // 캐릭터 객체 생성
         Inventory inventory = new Inventory();        // 인벤토리 객체 생성
         
-        // 기본 아이템 추가 (나중에 상점에서 구매하면 추가할 수도 있음)
+        // 기본 아이템 객체 생성
         inventory.AddItem(new Item("무쇠갑옷", 0, 5, 300, "무쇠로 만들어져 튼튼한 갑옷입니다."));
         inventory.AddItem(new Item("스파르타의 창", 7, 0, 500, "스파르타 전사들이 사용한 전설의 창입니다."));
         inventory.AddItem(new Item("낡은 검", 2, 0, 100, "쉽게 볼 수 있는 낡은 검입니다."));
@@ -187,26 +173,32 @@ class Program
                         Console.WriteLine("\n1. 상태보기를 선택하셨습니다.\n");
                         player.ShowStatus();
                         Console.WriteLine("\n0. 나가기 \n");
-                        Console.Write("원하시는 행동을 입력해주세요. ");
-                    
-                        string input2 = Console.ReadLine();
-                        int num2;
-                        
-                        if (!int.TryParse(input2, out num2) || num2 != 0)
+
+                        while (true)
                         {
-                            Console.WriteLine("잘못된 입력입니다. 다시 입력해 주세요.");
-                            continue;
+                            Console.Write("원하시는 행동을 입력해주세요. ");
+                            string input2 = Console.ReadLine();
+                            int num2;
+
+                            if (int.TryParse(input2, out num2) && num2 == 0)
+                            {
+                                break;
+                            }
+                            else
+                            {
+                                Console.WriteLine("\n잘못된 입력입니다.");
+                            }
                         }
                         break;
+                        
                     }
                     break;
                 case 2:
                     while (true)
                     {
                         inventory.ShowInventory();
-
-                        Console.WriteLine("\n2. 인벤토리를 선택하셨습니다.");
-                        Console.WriteLine("\n[아이템 목록]\n\n1. 장착 관리\n0. 나가기\n");
+                        
+                        Console.WriteLine("\n1. 장착 관리\n0. 나가기\n");
                         Console.Write("원하시는 행동을 입력해 주세요. ");
                         
                         string input3 = Console.ReadLine();
@@ -222,7 +214,7 @@ class Program
                         {
                             inventory.EquipItem();  // 장착 기능 추가
                         }
-                        else if (action == 2)
+                        else if (action == 0)
                         {
                             break;
                         }
