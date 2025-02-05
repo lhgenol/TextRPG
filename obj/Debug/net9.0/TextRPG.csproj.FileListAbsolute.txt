@@ -12,3 +12,4 @@
 /Users/lee/RiderProjects/TextRPG/TextRPG/obj/Debug/net9.0/TextRPG.pdb
 /Users/lee/RiderProjects/TextRPG/TextRPG/obj/Debug/net9.0/TextRPG.genruntimeconfig.cache
 /Users/lee/RiderProjects/TextRPG/TextRPG/obj/Debug/net9.0/ref/TextRPG.dll
+/Users/lee/RiderProjects/TextRPG/TextRPG/obj/Debug/net9.0/TextRPG.sourcelink.json
