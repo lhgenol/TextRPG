@@ -1,0 +1,14 @@
+/Users/lee/RiderProjects/TextRPG/TextRPG/bin/Debug/net9.0/TextRPG
+/Users/lee/RiderProjects/TextRPG/TextRPG/bin/Debug/net9.0/TextRPG.deps.json
+/Users/lee/RiderProjects/TextRPG/TextRPG/bin/Debug/net9.0/TextRPG.runtimeconfig.json
+/Users/lee/RiderProjects/TextRPG/TextRPG/bin/Debug/net9.0/TextRPG.dll
+/Users/lee/RiderProjects/TextRPG/TextRPG/bin/Debug/net9.0/TextRPG.pdb
+/Users/lee/RiderProjects/TextRPG/TextRPG/obj/Debug/net9.0/TextRPG.GeneratedMSBuildEditorConfig.editorconfig
+/Users/lee/RiderProjects/TextRPG/TextRPG/obj/Debug/net9.0/TextRPG.AssemblyInfoInputs.cache
+/Users/lee/RiderProjects/TextRPG/TextRPG/obj/Debug/net9.0/TextRPG.AssemblyInfo.cs
+/Users/lee/RiderProjects/TextRPG/TextRPG/obj/Debug/net9.0/TextRPG.csproj.CoreCompileInputs.cache
+/Users/lee/RiderProjects/TextRPG/TextRPG/obj/Debug/net9.0/TextRPG.dll
+/Users/lee/RiderProjects/TextRPG/TextRPG/obj/Debug/net9.0/refint/TextRPG.dll
+/Users/lee/RiderProjects/TextRPG/TextRPG/obj/Debug/net9.0/TextRPG.pdb
+/Users/lee/RiderProjects/TextRPG/TextRPG/obj/Debug/net9.0/TextRPG.genruntimeconfig.cache
+/Users/lee/RiderProjects/TextRPG/TextRPG/obj/Debug/net9.0/ref/TextRPG.dll
